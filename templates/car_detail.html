@@ -9,7 +9,7 @@
 <p>Price: ${{ car.price }}</p>
 <p>Description: {{ car.description }}</p>
 
-<form method="POST" action="{% url 'add_to_wishlist' car.id %}">
+<form method="POST" action="{% url 'wishlist:add_to_wishlist' car.id %}">
     {% csrf_token %}
     <input type="submit" value="Add to Wishlist">
 </form>
