@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ car.brand }} {{ car.model }} - CarHub{% endblock %}
+
+{% block content %}
+<h1>{{ car.brand }} {{ car.model }}</h1>
+<img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
+<p>Year: {{ car.year }}</p>
+<p>Price: ${{ car.price }}</p>
+<p>Description: {{ car.description }}</p>
+
+<form method="POST" action="{% url 'add_to_wishlist' car.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Add to Wishlist">
+</form>
+
+<h2>Reviews</h2>
+<ul class="reviews">
+    {% for review in car.reviews.all %}
+    <li>
+        <p>Rating: {{ review.rating }} / 5</p>
+        <p>{{ review.comment }}</p>
+        <p>Posted by {{ review.customer.username }} on {{ review.date_posted }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Add a Review</h2>
+<form method="POST" action="{% url 'add_review' car.id %}">
+    {% csrf_token %}
+    <label for="rating">Rating:</label>
+    <input type="number" name="rating" id="rating" min="1" max="5">
+    
+    <label for="comment">Comment:</label>
+    <textarea name="comment" id="comment"></textarea>
+    
+    <input type="submit" value="Submit Review">
+</form>
+{% endblock %}

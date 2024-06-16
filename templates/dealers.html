@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Dealers - CarHub Online Showroom{% endblock %}
+
+{% block content %}
+<h1>Dealers</h1>
+
+<ul class="dealer-list">
+    {% for dealer in dealers %}
+    <li>
+        <h2>{{ dealer.dealership_name }}</h2>
+        <p>{{ dealer.contact_info }}</p>
+        <a href="{% url 'dealer_detail' dealer.id %}">View Profile</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

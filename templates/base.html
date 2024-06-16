@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}CarHub Online Showroom{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header class="bg-primary text-white p-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <!-- Add your logo here -->
+                    <h1>CarHub</h1>
+                </div>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'showroom' %}">Showroom</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'dealers' %}">Dealers</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'wishlist:view_wishlist' %}">Wishlist</a></li>
+                        {% if user.is_authenticated %}
+                                               <li class="nav-item"><a class="nav-link text-white" >Logout</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p>&copy; 2024 CarHub. Designed by BING LENG</p>
+    </footer>
+</body>
+</html>
